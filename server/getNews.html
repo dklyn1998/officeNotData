@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <style>
+      *{
+          margin: 0;
+      }
+    .el-container{
+      height: 100%;
+    }
+    .el-pagination{
+    text-align: right;
+    }
+    .el-header{
+      background-color: #fff;
+      box-shadow: 0 5px 10px 5px rgba(199, 199, 199, 0.3);
+      /* text-align:right; */
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      min-height: 92px;
+    }
+    .el-aside{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 0 0 1px #D9D9D9;
+      z-index: 100;
+      height: 100vh;
+    }
+    .logo{
+      font-size: 38px;
+      color: #FF6900;
+      margin-top: 30px;
+    }
+    .logo_image{
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-top: 30px;
+    }
+    .btn_area{
+      margin-top: 10px;
+    
+    }
+    .el-menu{
+      width: 100%;
+    }
+    .logo_top{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 20px;
+    }
+    .div_left{
+      margin-right: 20px;
+    }
+    /* 页面样式 */
+    .ql-editor{
+    min-height: 300px;
+}
+.upload-demo{
+    margin-top: 30px;
+    margin-left: 40px;
+    margin-bottom: 30px;
+}
+.main_text{
+    margin-left: 40px;
+}
+.row_top{
+    margin-top: 50px;
+}
+    </style>
+</head>
+<body>
+  <div id="app">
+        <el-container class='home_container'>
+          <!-- 侧边栏区域 -->
+          <el-aside width="200px">
+            <div class="logo">LOGO</div>
+            <img src="../assets/image/home/logo.png"  class="logo_image"/>
+            <div>李明</div>
+            <div class='btn_area'>
+               <el-button type="warning" icon="el-icon-setting" circle size='mini'></el-button>
+              <el-button type="warning" icon="el-icon-delete" circle size='mini'></el-button>
+            </div>
+            <el-menu
+              default-active="1"
+              class="el-menu-vertical-demo"
+              active-text-color='#fff'
+              router>
+              <!-- 一级菜单 -->
+              <el-submenu index="1">
+                <!-- 一级菜单的模板区域 -->
+                <template slot="title"><span>个人办公</span></template>
+                <el-menu-item index="dailyWork">日常办公</el-menu-item>
+                <el-menu-item index="studyReport">学习报告</el-menu-item>
+              </el-submenu>
+              <el-submenu index="2">
+                <!-- 一级菜单的模板区域 -->
+                <template slot="title"><span>项目中心</span></template>
+                <el-menu-item index="project">项目</el-menu-item>
+                <el-menu-item index="statement">统计报表</el-menu-item>
+              </el-submenu>
+              <el-submenu index="3">
+                <!-- 一级菜单的模板区域 -->
+                <template slot="title"><span>行政管理</span></template>
+                <el-menu-item index="department">部门管理</el-menu-item>
+                <el-menu-item index="staff">职员管理</el-menu-item>
+              </el-submenu>
+              <el-submenu index="4">
+                <!-- 一级菜单的模板区域 -->
+                <template slot="title"><span>服务中心</span></template>
+                <el-menu-item index="member">会员客户</el-menu-item>
+                <el-menu-item index="news">公告新闻</el-menu-item>
+                <el-menu-item index="address">通信录</el-menu-item>
+              </el-submenu>
+              <el-submenu index="5">
+                <!-- 一级菜单的模板区域 -->
+                <template slot="title"><span>人事酬薪</span></template>
+                <el-menu-item index="myAttendance">我的考勤</el-menu-item>
+                <el-menu-item index="attendance">考勤管理</el-menu-item>
+                <el-menu-item index="performance">业绩管理</el-menu-item>
+                <el-menu-item index="mySalary">我的酬薪</el-menu-item>
+                <el-menu-item index="agreement">劳动合同</el-menu-item>
+                <el-menu-item index="signAgreement">签约合同</el-menu-item>
+              </el-submenu>
+              <el-submenu index="6">
+                <!-- 一级菜单的模板区域 -->
+                <template slot="title"><span>财务中心</span></template>
+                <el-menu-item index="reimbursement">费用报销</el-menu-item>
+                <el-menu-item index="financialStatement">财务报表</el-menu-item>
+              </el-submenu>
+              <el-submenu index="7">
+                <!-- 一级菜单的模板区域 -->
+                <template slot="title"><span>客户中心</span></template>
+                <el-menu-item index="customList">客户名单</el-menu-item>
+                <el-menu-item index="customerDynamics">客户动态</el-menu-item>
+              </el-submenu>
+            </el-menu>
+            </el-aside>
+          <el-container>
+            <!-- 头部区域 -->
+            <el-header>
+              <img src="../assets/logo.png" class='logo_top' alt="">
+              <div class="div_left">管理员</div>
+              <el-button icon="el-icon-circle-close">退出</el-button>
+            </el-header>
+            <!-- 页面主体区域 -->
+            <el-main>
+                    <div>
+                            <el-row>
+                                <el-col :span=6>
+                                    <el-form :model="ruleForm" :rules="rules" ref="refForm" label-width="100px">
+                                        <el-form-item label="发布时间" prop="startData">
+                                            <el-form-item prop="StartDate">
+                                                <el-date-picker type="date" placeholder="选择开始日期" v-model="ruleForm.StartDate" style="width: 100%;"></el-date-picker>
+                                            </el-form-item>
+                                        </el-form-item>
+                                    </el-form>
+                                </el-col>
+                            </el-row>
+                            <el-row>
+                                <el-col :span='6'>
+                                    <el-form :model="ruleForm" :rules="rules" ref="refForm" label-width="100px">
+                                        <el-form-item label="类型" prop="kinds">
+                                            <el-select v-model="ruleForm.kinds" placeholder="类型">
+                                                <el-option label="类型1" value="shanghai"></el-option>
+                                                <el-option label="类型2" value="beijing"></el-option>
+                                            </el-select>
+                                        </el-form-item>
+                                    </el-form>
+                                </el-col>
+                            </el-row>
+                            <el-row>
+                                <el-col :span='13'>
+                                    <el-form :model="ruleForm" :rules="rules" ref="refForm" label-width="100px">
+                                        <el-form-item label="标题：" prop="title">
+                                            <el-input v-model="ruleForm.title"></el-input>
+                                        </el-form-item>
+                                    </el-form>
+                                </el-col>
+                            </el-row>
+                            <el-row>
+                                <el-col :span='1.5' class='main_text'>
+                                    正文：
+                                </el-col>
+                                <el-col :span='15'>
+                                    <!-- 富文本编辑器组件 -->
+                                    <quill-editor v-model="ruleForm.main">
+                                    </quill-editor>
+                                </el-col>
+                            </el-row>
+                            <el-row>
+                                <el-col>
+                                    <el-upload
+                                        class="upload-demo"
+                                        action="https://jsonplaceholder.typicode.com/posts/"
+                                        multiple
+                                        :limit="3">
+                                        <el-button size="small" type="primary">点击上传</el-button>
+                                        <div slot="tip" class="el-upload__tip">选择上传本地文件，可多选</div>
+                                    </el-upload>
+                                </el-col>
+                            </el-row>
+                            <el-row>
+                                <el-col :span='6'>
+                                    <el-form :model="ruleForm" :rules="rules" ref="refForm" label-width="100px">
+                                        <el-form-item label="发布人" prop="reportPeople">
+                                            <el-input v-model="ruleForm.reportPeople"></el-input>
+                                        </el-form-item>
+                                    </el-form>
+                                </el-col>
+                            </el-row>
+                            <el-row class="row_top">
+                                <el-col class='main_text'>
+                                    <el-button type='warning'>保存为正式</el-button>
+                                    <el-button type='primary'>放弃编辑</el-button>
+                                </el-col>
+                            </el-row>
+                        </div>
+            </el-main>
+            </el-container>
+            </el-container>
+    </div>
+</body>
+  <!-- import Vue before Element -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data () {
+        return {
+      // 表格的数据
+      ruleForm: {
+        sendData: '',
+        kinds: '',
+        StartDate: '',
+        title: '',
+        main: '',
+        reportPeople: ''
+      },
+      //   表单的验证规则
+      rules: {
+        startData: [ { required: true, message: '请输入编号', trigger: 'blur' } ],
+        kinds: [ { required: true, message: '请选择类型', trigger: 'blur' } ],
+        title: [ { required: true, message: '请输入标题', trigger: 'blur' } ],
+        reportPeople: [ { required: true, message: '请输入报告人', trigger: 'blur' } ]
+      }
+    }
+},
+ 
+  created () {
+
+  },
+  methods: {
+    isShow (number) {
+      this.showActive = number
+      console.log(this.showActive)
+    },
+    newAttend () {
+      this.$router.push('/newAttend')
+    }
+}
+})
+  </script>
+</html>
